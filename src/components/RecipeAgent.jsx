@@ -40,7 +40,7 @@ export default async function RecipeAgent({userData}){
      
     
                       // calling youtube API to get two recipe videos
-               const youtubeResponse = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+              /* const youtubeResponse = await axios.get('https://www.googleapis.com/youtube/v3/search', {
                 params: {
                   part: 'snippet',
                   q: dishName, 
@@ -49,7 +49,7 @@ export default async function RecipeAgent({userData}){
                 },
               })
               const videoLinks = youtubeResponse.data.items
-              console.log(videoLinks)
+              console.log(videoLinks) */
           return {openaiRecipeContent, videoLinks}
          
         
