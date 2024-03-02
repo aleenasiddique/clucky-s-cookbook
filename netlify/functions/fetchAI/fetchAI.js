@@ -1,13 +1,49 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
+import OpenAI from "openai"
+import axios from "axios"
+import { getRestrictedFoods } from "../../../src/components/Tools"
+
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+ 
+})  
+
+const youtubeKey = process.env.YOUTUBE_API_KEY
+
+const availableFunctions = {
+  getRestrictedFoods
+}
+
+
 const handler = async (event) => {
+  const messages = JSON.parse(event.body)
   try {
-    const subject = event.queryStringParameters.name || 'World'
+    const runner = openai.beta.chat.completions.runTools({
+      model: "gpt-3.5-turbo-1106",
+      messages,
+      tools: [
+          {
+            type: 'function',
+            function: {
+              function: getRestrictedFoods,
+              parameters: { type: 'object',
+               properties: {
+                selectedRestriction: {
+                  type: "string",
+                  description: "The dietary Restriction that user have for which we need to get the list of restricted items"
+              }
+               }  },
+            }
+          }
+          ],
+     })
+     const openaiRecipeContent = await runner.finalContent()
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
-      // // more keys you can return:
-      // headers: { "headerName": "headerValue", ... },
-      // isBase64Encoded: true,
+      body: JSON.stringify({
+        reply: openaiRecipeContent
+       }),
+    
     }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }

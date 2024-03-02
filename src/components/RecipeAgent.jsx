@@ -1,25 +1,7 @@
-import OpenAI from "openai"
-
-import { getRestrictedFoods } from "./Tools"
-import axios from "axios"
-
-
 export default async function RecipeAgent({userData}){
-                //getting open AI key
-     const openai = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY,
-       
-    })
-          //getting youtube API key
-     const youtubeKey = process.env.YOUTUBE_API_KEY
-
-    const availableFunctions = {
-        getRestrictedFoods
-    }
    
-                    // openai messages array
-    const food = getRestrictedFoods()
-    console.log(food)
+ // openai messages array
+
        const messages = [
         {
             role: "system",
@@ -41,27 +23,17 @@ export default async function RecipeAgent({userData}){
       
        //open ai chat completions end 
        try {
-       const runner = openai.beta.chat.completions.runTools({
-        model: "gpt-3.5-turbo-1106",
-        messages,
-        tools: [
-            {
-              type: 'function',
-              function: {
-                function: getRestrictedFoods,
-                parameters: { type: 'object',
-                 properties: {
-                  selectedRestriction: {
-                    type: "string",
-                    description: "The dietary Restriction that user have for which we need to get the list of restricted items"
-                }
-                 }  },
-              }
-            }
-            ],
-       })
-       const openaiRecipeContent = await runner.finalContent()
-      
+        const url = 'https://clucky-s-cookbook.netlify.app/.netlify/functions/fetchAI'
+        const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+       'content-type': 'application/json',
+         },
+        body: JSON.stringify(messages) 
+         })
+         const recipeData = await response.json() 
+         console.log(recipeData)         
+  
        //getting the dishName to pass to youtube API
        const dishName = openaiRecipeContent.split("##")[1].trim()
      
