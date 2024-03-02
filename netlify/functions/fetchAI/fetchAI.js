@@ -1,5 +1,5 @@
 import OpenAI from "openai"
-import { getRestrictedFoods } from "./././src/components/Tools.jsx"
+const { getRestrictedFoods } = require('../../../src/components/Tools')
 
 
 const openai = new OpenAI({
