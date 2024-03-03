@@ -1,4 +1,3 @@
-import { getRestrictedFoods } from "./Tools"
 
 export default async function RecipeAgent({userData}){
    
@@ -6,8 +5,8 @@ export default async function RecipeAgent({userData}){
   const availableFunctions = {
     getRestrictedFoods
 }
-//const food = getRestrictedFoods()
-//console.log(food)
+const food = getRestrictedFoods()
+console.log(food)
 
  // openai messages array
 
@@ -29,7 +28,7 @@ export default async function RecipeAgent({userData}){
             content: `dish:${userData.dishName} available ingredients: ${userData.availableIngredients} dietary restrictions: ${userData.dietaryRestrictions} allergies: ${userData.allergies} cooking skills level: ${userData.cookingLevel}` 
         }
        ]
-       fetchData = {messages: messages, function: getRestrictedFoods}
+      
        //open ai chat completions end 
        try {
         const url = 'https://clucky-s-cookbook.netlify.app/.netlify/functions/fetchAI'
@@ -38,7 +37,7 @@ export default async function RecipeAgent({userData}){
         headers: {
        'content-type': 'application/json',
          },
-        body: JSON.stringify(fetchData) 
+        body: JSON.stringify(messages) 
          })
          const recipeData = await response.json() 
          console.log(recipeData)         
