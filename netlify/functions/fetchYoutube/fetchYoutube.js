@@ -2,16 +2,16 @@
 const youtubeKey = process.env.YOUTUBE_API_KEY
 
 
-const handler = async (event) => {
-  const params = new URLSearchParams({
-    part: 'snippet',
-    q: event.body,
-    maxResults: 2,
-    key: youtubeKey
-  })
-  
+
   try {
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?${params}`)
+        const response = await fetch('https://www.googleapis.com/youtube/v3/search',{
+          params: {
+            part: 'snippet',
+            q: event.body, 
+            maxResults: 2,
+            key: youtubeKey
+          },
+        } )
          const data = await response.json()
          const videoLinks = data.items
     return {
