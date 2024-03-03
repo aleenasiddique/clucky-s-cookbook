@@ -1,5 +1,5 @@
 import OpenAI from "openai"
-import { getRestrictedFoods } from "../../../src/components/Tools"
+
 import dietaryRestrictions from "../../../src/data"
 
 
@@ -11,18 +11,11 @@ const openai = new OpenAI({
 const youtubeKey = process.env.YOUTUBE_API_KEY
 const data = dietaryRestrictions
 
-const availableFunctions = {
-  getRestrictedFoods
-}
-const food = getRestrictedFoods()
-console.log(food)
-
-
 
 const handler = async (event) => {
   const messages = JSON.parse(event.body)
   try {
-    const runner = openai.beta.chat.completions.runTools({
+   /* const runner = openai.beta.chat.completions.runTools({
       model: "gpt-3.5-turbo-1106",
       messages,
       tools: [
@@ -41,7 +34,7 @@ const handler = async (event) => {
           }
           ],
      })
-     const openaiRecipeContent = await runner.finalContent()
+     const openaiRecipeContent = await runner.finalContent() */
     return {
       statusCode: 200,
       body: JSON.stringify({
