@@ -50,10 +50,11 @@ export default async function RecipeAgent({userData}){
        body: JSON.stringify(dishName) 
         })
         const youtubeData = await youtubeResponse.json() 
+        const videoLinks = youtubeData.reply
         console.log(youtubeData)  
     
             
-         // return {openaiRecipeContent, videoLinks}
+          return {openaiRecipeContent, videoLinks}
          
         
         }
