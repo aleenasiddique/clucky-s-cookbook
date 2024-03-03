@@ -10,7 +10,7 @@ const openai = new OpenAI({
 
 const youtubeKey = process.env.YOUTUBE_API_KEY
 const data = dietaryRestrictions
-console.log(`this is the data ${data}`)
+
 const availableFunctions = {
   getRestrictedFoods
 }
@@ -45,7 +45,7 @@ const handler = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        reply: openaiRecipeContent
+        reply: data
        }),
     
     }
