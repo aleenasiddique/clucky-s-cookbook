@@ -9,11 +9,9 @@ const openai = new OpenAI({
 })  
 
 const youtubeKey = process.env.YOUTUBE_API_KEY
-const data = dietaryRestrictions
 
 // Function to provide restricted foods list based on user's dietary restrictions
 async function getRestrictedFoods(selectedRestriction) {
-  console.log(dietaryRestrictions);
   try {
       if (selectedRestriction === 'none') {
           return [] // No restrictions
@@ -36,7 +34,7 @@ async function getRestrictedFoods(selectedRestriction) {
 const handler = async (event) => {
   const messages = JSON.parse(event.body)
   try {
-    const runner = openai.beta.chat.completions.runTools({
+   /* const runner = openai.beta.chat.completions.runTools({
       model: "gpt-3.5-turbo-1106",
       messages: messages, 
       tools: [
@@ -55,7 +53,7 @@ const handler = async (event) => {
           }
           ],
      })
-     const openaiRecipeContent = await runner.finalContent() 
+     const openaiRecipeContent = await runner.finalContent()  */
     return {
       statusCode: 200,
       body: JSON.stringify({
