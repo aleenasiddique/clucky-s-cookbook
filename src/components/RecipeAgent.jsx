@@ -38,7 +38,7 @@ export default async function RecipeAgent({userData}){
          console.log(recipeData)         
   
        //getting the dishName to pass to youtube API
-       const dishName = openaiRecipeContent.split("##")[1].trim()
+       //const dishName = openaiRecipeContent.split("##")[1].trim()
      
      
     
