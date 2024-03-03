@@ -1,5 +1,6 @@
 import OpenAI from "openai"
 import { getRestrictedFoods } from "../../../src/components/Tools"
+import dietaryRestrictions from "../../../src/data"
 
 
 const openai = new OpenAI({
@@ -8,6 +9,8 @@ const openai = new OpenAI({
 })  
 
 const youtubeKey = process.env.YOUTUBE_API_KEY
+const data = dietaryRestrictions
+console.log(data)
 const availableFunctions = {
   getRestrictedFoods
 }
