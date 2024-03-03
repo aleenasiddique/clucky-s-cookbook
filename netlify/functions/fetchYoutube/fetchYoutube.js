@@ -2,6 +2,7 @@
 const youtubeKey = process.env.YOUTUBE_API_KEY
 
 
+const handler = async (event) => {
 
   try {
         const response = await fetch('https://www.googleapis.com/youtube/v3/search',{
