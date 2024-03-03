@@ -2,11 +2,6 @@
 export default async function RecipeAgent({userData}){
    
 
-  const availableFunctions = {
-    getRestrictedFoods
-}
-const food = getRestrictedFoods()
-console.log(food)
 
  // openai messages array
 
