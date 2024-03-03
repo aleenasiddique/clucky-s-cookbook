@@ -38,7 +38,7 @@ const handler = async (event) => {
   try {
     const runner = openai.beta.chat.completions.runTools({
       model: "gpt-3.5-turbo-1106",
-      messages,
+      messages: messages, 
       tools: [
           {
             type: 'function',
