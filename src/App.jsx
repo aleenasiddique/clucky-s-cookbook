@@ -5,7 +5,7 @@ import Questionnaire from './pages/Questionnnaire'
 import RecipeAgent from './components/RecipeAgent'
 import Recipes from './pages/Recipes'
 import ErrorPage from './pages/ErrorPage'
-import { getRestrictedFoods } from './components/Tools' 
+import { getRestrictedFoods } from './tools'
 export default function App(){
     const [currentPage, setCurrentPage] = React.useState('start')
          const [userData, setUserData]= React.useState({
