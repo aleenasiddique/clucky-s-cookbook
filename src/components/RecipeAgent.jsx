@@ -35,11 +35,11 @@ export default async function RecipeAgent({userData}){
         body: JSON.stringify(messages) 
          })
          const recipeData = await openaiResponse.json() 
-         console.log(recipeData)         
+               
           const openaiRecipeContent = recipeData.reply
       //getting the dishName to pass to youtube API
        const dishName = openaiRecipeContent.split("##")[1].trim()
-       console.log(dishName)
+     
      
        const youtubeUrl = 'https://clucky-s-cookbook.netlify.app/.netlify/functions/fetchYoutube'
        const youtubeResponse = await fetch(youtubeUrl, {
@@ -51,7 +51,7 @@ export default async function RecipeAgent({userData}){
         })
         const youtubeData = await youtubeResponse.json() 
         const videoLinks = youtubeData.reply
-        console.log(youtubeData)  
+        
     
             
           return {openaiRecipeContent, videoLinks}

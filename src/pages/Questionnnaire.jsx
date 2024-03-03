@@ -15,7 +15,7 @@ export default function Questionnaire({handleFormSubmit, userData, setUserData})
             ...prevUserData, 
             [event.target.name]: event.target.value
             }
-            console.log(updatedUserData)
+            
             return (updatedUserData)
          })
          
