@@ -1,13 +1,25 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
+
+const youtubeKey = process.env.YOUTUBE_API_KEY
+
+
 const handler = async (event) => {
+  const params = new URLSearchParams({
+    part: 'snippet',
+    q: event.body,
+    maxResults: 2,
+    key: youtubeKey
+  })
+  
   try {
-    const subject = event.queryStringParameters.name || 'World'
+        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?${params}`)
+         const data = await response.json()
+         const videoLinks = data.items
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
-      // // more keys you can return:
-      // headers: { "headerName": "headerValue", ... },
-      // isBase64Encoded: true,
+      body: JSON.stringify({ 
+        reply: videoLinks
+       }),
+     
     }
   } catch (error) {
     return { statusCode: 500, body: error.toString() }

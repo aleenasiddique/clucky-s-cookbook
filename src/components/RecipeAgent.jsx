@@ -26,34 +26,33 @@ export default async function RecipeAgent({userData}){
       
        //open ai chat completions end 
        try {
-        const url = 'https://clucky-s-cookbook.netlify.app/.netlify/functions/fetchAI'
-        const response = await fetch(url, {
+        const openaiUrl = 'https://clucky-s-cookbook.netlify.app/.netlify/functions/fetchAI'
+        const openaiResponse = await fetch(openaiUrl, {
         method: 'POST',
         headers: {
        'content-type': 'application/json',
          },
         body: JSON.stringify(messages) 
          })
-         const recipeData = await response.json() 
+         const recipeData = await openaiResponse.json() 
          console.log(recipeData)         
           const openaiRecipeContent = recipeData.reply
       //getting the dishName to pass to youtube API
        const dishName = openaiRecipeContent.split("##")[1].trim()
        console.log(dishName)
      
-     
+       const youtubeUrl = 'https://clucky-s-cookbook.netlify.app/.netlify/functions/fetchYoutube'
+       const youtubeResponse = await fetch(youtubeUrl, {
+       method: 'POST',
+       headers: {
+      'content-type': 'application/json',
+        },
+       body: JSON.stringify(dishName) 
+        })
+        const youtubeData = await youtubeResponse.json() 
+        console.log(youtubeData)  
     
-                      // calling youtube API to get two recipe videos
-              /* const youtubeResponse = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-                params: {
-                  part: 'snippet',
-                  q: dishName, 
-                  maxResults: 2,
-                  key: youtubeKey
-                },
-              })
-              const videoLinks = youtubeResponse.data.items
-              console.log(videoLinks) */
+            
          // return {openaiRecipeContent, videoLinks}
          
         
