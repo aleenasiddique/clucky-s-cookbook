@@ -1,5 +1,5 @@
 import OpenAI from "openai"
-const { getRestrictedFoods } = require('../../../../../src/components/Tools')
+
 
 
 const openai = new OpenAI({
@@ -9,13 +9,11 @@ const openai = new OpenAI({
 
 const youtubeKey = process.env.YOUTUBE_API_KEY
 
-const availableFunctions = {
-  getRestrictedFoods
-}
 
 
 const handler = async (event) => {
-  const messages = JSON.parse(event.body)
+  const messages = JSON.parse(event.body.messages)
+  const getRestrictedFoods = JSON.parse(event.body.function)
   try {
     const runner = openai.beta.chat.completions.runTools({
       model: "gpt-3.5-turbo-1106",
