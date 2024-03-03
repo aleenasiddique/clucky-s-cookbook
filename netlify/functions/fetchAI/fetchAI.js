@@ -8,7 +8,7 @@ const openai = new OpenAI({
  
 })  
 
-const youtubeKey = process.env.YOUTUBE_API_KEY
+
 
 
 
