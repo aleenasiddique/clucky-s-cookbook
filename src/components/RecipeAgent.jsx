@@ -53,7 +53,7 @@ export default async function RecipeAgent({userData}){
               })
               const videoLinks = youtubeResponse.data.items
               console.log(videoLinks) */
-          return {openaiRecipeContent, videoLinks}
+         // return {openaiRecipeContent, videoLinks}
          
         
         }
