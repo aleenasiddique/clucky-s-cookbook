@@ -24,7 +24,7 @@ export default async function RecipeAgent({userData}){
         }
        ]
       
-       //open ai chat completions end 
+       //netlify serverless function calling for fetching openAI data
        try {
         const openaiUrl = 'https://clucky-s-cookbook.netlify.app/.netlify/functions/fetchAI'
         const openaiResponse = await fetch(openaiUrl, {
@@ -32,7 +32,7 @@ export default async function RecipeAgent({userData}){
         headers: {
        'content-type': 'application/json',
          },
-        body: JSON.stringify(messages) 
+        body: JSON.stringify(messages) //passing messages array to serverless function
          })
          const recipeData = await openaiResponse.json() 
                
@@ -40,14 +40,14 @@ export default async function RecipeAgent({userData}){
       //getting the dishName to pass to youtube API
        const dishName = openaiRecipeContent.split("##")[1].trim()
      
-     
+     //netlify serverless function calling for fetching yoyutube data 
        const youtubeUrl = 'https://clucky-s-cookbook.netlify.app/.netlify/functions/fetchYoutube'
        const youtubeResponse = await fetch(youtubeUrl, {
        method: 'POST',
        headers: {
       'content-type': 'application/json',
         },
-       body: JSON.stringify(dishName) 
+       body: JSON.stringify(dishName) //passing dishName
         })
         const youtubeData = await youtubeResponse.json() 
         const videoLinks = youtubeData.reply

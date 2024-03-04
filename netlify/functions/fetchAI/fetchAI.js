@@ -9,12 +9,10 @@ const openai = new OpenAI({
 })  
 
 
-
-
-
 const handler = async (event) => {
   const messages = JSON.parse(event.body)
   try {
+    //openAI runTools end
     const runner = openai.beta.chat.completions.runTools({
       model: "gpt-3.5-turbo-1106",
       messages: messages, 
@@ -38,7 +36,7 @@ const handler = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        reply: openaiRecipeContent
+        reply: openaiRecipeContent //returning back recipe to RecipeAgent component
        }),
     
     }
