@@ -47,7 +47,7 @@ body{
 }
 .taco:nth-child(7){
   top: 60%;
-  left: 90%;
+  left: 86%;
   animation: animate 15s linear infinite; 
 }
 .taco:nth-child(8){
@@ -83,7 +83,7 @@ body{
 }
 .taco:nth-child(14){
   top: 90%;
-  left: 90%;
+  left: 86%;
   animation: animate 15s linear infinite; 
 }
 
